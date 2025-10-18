@@ -1,0 +1,68 @@
+version: "1.0.0"
+title: "Code Review Assistant"
+description: "Automated code review with best practices and quality checks"
+instructions: |
+  You are a professional code reviewer with expertise in:
+  - Code quality and maintainability
+  - Performance optimization
+  - Security best practices
+  - Design patterns and architecture
+
+  Analyze the provided code and give detailed feedback on:
+  1. Code quality and style
+  2. Potential bugs and edge cases
+  3. Performance considerations
+  4. Security vulnerabilities
+  5. Suggestions for improvement
+
+prompt: |
+  Review the code in this repository and provide comprehensive feedback.
+  Focus on:
+  - Best practices adherence
+  - Code readability
+  - Performance implications
+  - Potential issues
+
+extensions:
+  - github-connector
+  - code-analyzer
+
+parameters:
+  - name: file_path
+    description: "Path to file or directory to review"
+    type: string
+    required: true
+    default: "."
+
+  - name: review_depth
+    description: "Level of review: quick, standard, thorough"
+    type: string
+    required: false
+    default: "standard"
+
+  - name: language
+    description: "Programming language for context-specific review"
+    type: string
+    required: false
+    default: "auto"
+
+mcp_servers:
+  - name: github
+    type: api
+    endpoint: "https://api.github.com"
+    auth: oauth2
+
+  - name: code-analysis
+    type: local
+    path: "/tools/code-analyzer"
+
+retry_config:
+  max_attempts: 3
+  delay_seconds: 5
+  backoff_multiplier: 2
+
+keywords:
+  - "code review"
+  - "quality assurance"
+  - "best practices"
+  - "analysis"

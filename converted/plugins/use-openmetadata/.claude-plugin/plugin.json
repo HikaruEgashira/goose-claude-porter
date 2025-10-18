@@ -1,0 +1,17 @@
+{
+  "id": "use-openmetadata",
+  "name": "Use OpenMetadata",
+  "version": "1.0.0",
+  "description": "Interact with OpenMetadata in Goose via OpenMetadata MCP Server to generate SQL or propagate classifications",
+  "keywords": [
+    "format"
+  ],
+  "commands": "commands",
+  "environment_variables": [
+    {
+      "name": "FQN",
+      "required": true,
+      "description": "The fully qualified name of the asset in openmetadata you'd like an agent to act on"
+    }
+  ]
+}

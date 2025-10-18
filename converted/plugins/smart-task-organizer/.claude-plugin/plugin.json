@@ -1,0 +1,27 @@
+{
+  "id": "smart-task-organizer",
+  "name": "Smart Task Organizer",
+  "version": "1.0.0",
+  "description": "Automatically organize and prioritize tasks from files, emails, and messages into an actionable todo list",
+  "keywords": [
+    "format"
+  ],
+  "commands": "commands",
+  "environment_variables": [
+    {
+      "name": "SOURCE_TYPE",
+      "required": true,
+      "description": "Type of source to scan: files, emails, messages, notes, all"
+    },
+    {
+      "name": "PRIORITY_LEVEL",
+      "required": false,
+      "description": "Filter by priority: urgent, high, medium, low, all"
+    },
+    {
+      "name": "PROJECT_FILTER",
+      "required": false,
+      "description": "Filter tasks by specific project name"
+    }
+  ]
+}

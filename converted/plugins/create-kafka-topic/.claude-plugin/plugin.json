@@ -1,0 +1,35 @@
+{
+  "id": "create-kafka-topic",
+  "name": "Create Kafka Topic",
+  "version": "1.0.0",
+  "description": "Create a new Kafka topic with specified parameters.",
+  "keywords": [],
+  "commands": "commands",
+  "environment_variables": [
+    {
+      "name": "TOPIC_NAME",
+      "required": true,
+      "description": "The name of the Kafka topic to create"
+    },
+    {
+      "name": "OWNER",
+      "required": true,
+      "description": "The name/identifier of owner."
+    },
+    {
+      "name": "PUBLISHER",
+      "required": true,
+      "description": "The name/identifier of the publisher service or application"
+    },
+    {
+      "name": "SUBSCRIBERS",
+      "required": true,
+      "description": "Comma-separated list of subscriber services or applications that will consume from this topic (e.g., \"service1,service2,service3\")"
+    },
+    {
+      "name": "THROUGHPUT",
+      "required": false,
+      "description": "Expected throughput. Used to calculate optimal number of partitions for the topic"
+    }
+  ]
+}

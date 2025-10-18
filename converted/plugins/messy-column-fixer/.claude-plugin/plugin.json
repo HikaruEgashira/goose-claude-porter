@@ -1,0 +1,22 @@
+{
+  "id": "messy-column-fixer",
+  "name": "Messy Column Fixer",
+  "version": "1.0.0",
+  "description": "Fixes messy columns: normalizes and cleans CSV data.",
+  "keywords": [
+    "review"
+  ],
+  "commands": "commands",
+  "environment_variables": [
+    {
+      "name": "FILE_PATH",
+      "required": true,
+      "description": "Path to the CSV file you want to clean."
+    },
+    {
+      "name": "AUTO_FIX_DECISION",
+      "required": false,
+      "description": "Describe how fixes should be applied (e.g., 'apply automatically', 'suggest only')."
+    }
+  ]
+}

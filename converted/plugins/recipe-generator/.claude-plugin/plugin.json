@@ -1,0 +1,15 @@
+{
+  "id": "recipe-generator",
+  "name": "Recipe Generator",
+  "version": "1.0.0",
+  "description": "Creates other recipes",
+  "keywords": [],
+  "commands": "commands",
+  "environment_variables": [
+    {
+      "name": "PROMPT",
+      "required": true,
+      "description": "Description of what I want the recipe to do. Could be a file path"
+    }
+  ]
+}

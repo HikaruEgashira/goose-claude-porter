@@ -1,0 +1,190 @@
+# Claude Code Skills - LLM Context
+
+## Overview
+Claude Code Skills are reusable, self-contained modules of instructions, scripts, and resources that extend Claude's capabilities for specialized tasks. Skills dynamically load to improve performance on specific workflows and teach Claude how to complete tasks in a repeatable, organization-specific way.
+
+## Key Concepts
+
+### What are Skills?
+Skills are folders containing:
+- `SKILL.md` - The main file with YAML frontmatter containing metadata and instructions
+- Instructions - Step-by-step guidance on how to complete a task
+- Scripts and resources - Custom tools and utilities
+- Examples - Real-world use cases and patterns
+
+### How Skills Work
+1. Claude loads skills dynamically when relevant to a task
+2. Skills provide context-specific instructions and examples
+3. Skills can be used across Claude apps, Claude Code, and the API
+4. They teach Claude your organization's specific workflows and best practices
+
+## Skill Structure
+
+### SKILL.md Format
+```yaml
+---
+name: skill-identifier
+description: Clear description of what this skill does and when to use it
+---
+
+# Skill Title
+
+[Instructions and guidelines that Claude will follow]
+
+## Examples
+- Example 1
+- Example 2
+
+## Guidelines
+- Guideline 1
+- Guideline 2
+```
+
+### Required Frontmatter
+- `name` - Unique lowercase identifier (use hyphens for spaces)
+- `description` - Complete description of skill purpose and usage
+
+## Example Skills Available
+
+### Creative & Design
+- **algorithmic-art** - Generate art using p5.js with seeded randomness, flow fields, particle systems
+- **canvas-design** - Design visual art in PNG/PDF formats
+- **slack-gif-creator** - Create animated GIFs optimized for Slack
+
+### Development & Technical
+- **artifacts-builder** - Build complex HTML artifacts using React, Tailwind CSS, shadcn/ui
+- **mcp-server** - Create high-quality MCP servers to integrate external APIs
+- **webapp-testing** - Test local web applications using Playwright
+
+### Enterprise & Communication
+- **brand-guidelines** - Apply official brand guidelines to artifacts
+- **internal-comms** - Write internal communications (reports, newsletters, FAQs)
+- **theme-factory** - Style artifacts with 10 professional themes or custom themes
+
+### Document Skills (Advanced)
+- **docx** - Create, edit, analyze Word documents with tracked changes, comments
+- **pdf** - Extract text/tables, create, merge/split PDFs, handle forms
+- **pptx** - Create, edit PowerPoint presentations with layouts, templates, charts
+- **xlsx** - Create, edit Excel spreadsheets with formulas, formatting, data analysis
+
+## Using Skills in Claude Code
+
+### Installation
+Register the Anthropic skills repository as a plugin marketplace:
+```bash
+/plugin marketplace add anthropics/skills
+```
+
+### Using Skills
+1. Skills load automatically when relevant
+2. Mention the skill explicitly: "use the pdf skill to extract form fields from path/to/file.pdf"
+3. Skills work in Claude Code, Claude.ai (paid plans), and via the Claude API
+
+## Creating Custom Skills
+
+### Basic Steps
+1. Create a new folder with your skill name
+2. Create `SKILL.md` with proper frontmatter and instructions
+3. Add any supporting scripts or resources
+4. Test the skill in Claude Code or Claude.ai
+5. Share the skill folder for team use
+
+### Best Practices
+- Write clear, specific instructions
+- Include concrete examples
+- Specify when and why to use the skill
+- Add guidelines for quality output
+- Keep skills focused on specific tasks
+- Make skills reusable and composable
+
+## Skill Categories
+
+### For Developers
+- Code generation and analysis
+- Testing and debugging
+- Documentation generation
+- MCP server creation
+
+### For Organizations
+- Brand and style compliance
+- Communication templates
+- Document generation (Word, Excel, PDF, PowerPoint)
+- Workflow automation
+
+### For Specialists
+- Data analysis and visualization
+- Creative design and generation
+- Content creation
+- System automation
+
+## Integration Points
+
+### Claude Code
+- Register plugin marketplace to get skills
+- Use /plugin command to manage marketplaces
+- Skills activate automatically or on-demand
+
+### Claude.ai
+- Paid plans have access to example skills
+- Upload custom skills to your account
+- Share skills with team members
+
+### Claude API
+- Use pre-built Anthropic skills
+- Upload custom skills
+- Skills integrate with API calls
+- See Skills API Quickstart documentation
+
+## Document Skills Details
+
+### DOCX Skill
+Features: Tracked changes, comments, formatting preservation, text extraction
+
+### PDF Skill
+Features: Text and table extraction, document creation, merging/splitting, form field handling
+
+### PPTX Skill
+Features: Slide layouts, templates, charts, automated slide generation
+
+### XLSX Skill
+Features: Formula support, cell formatting, data analysis, visualization
+
+Note: Document skills are point-in-time references, not actively maintained
+
+## Resources
+
+- GitHub Repository: https://github.com/anthropics/skills
+- Support Article: What are skills?
+- Creating Custom Skills Guide
+- Using Skills in Claude Guide
+- Equipping Agents Guide: "Equipping agents for the real world with Agent Skills"
+
+## Installation via Claude API
+
+```python
+# Upload custom skills programmatically
+# See Skills API Quickstart for details
+```
+
+## Key Differences from Other Features
+
+### Skills vs Slash Commands
+- Slash commands: Quick, reusable prompts stored as markdown files
+- Skills: Dynamic, context-aware modules loaded automatically with instructions and resources
+
+### Skills vs MCP Servers
+- Skills: Instructions and context for Claude
+- MCP Servers: Integration protocols for external tools
+
+### Skills vs Plugins
+- Plugins: Collections of commands, skills, MCP servers, and hooks
+- Skills: Specific capability modules within plugins
+
+## Future Possibilities
+
+Skills enable:
+- Organization-specific AI assistants
+- Industry vertical expertise
+- Role-based AI capabilities
+- Reusable workflow packages
+- Community expertise sharing

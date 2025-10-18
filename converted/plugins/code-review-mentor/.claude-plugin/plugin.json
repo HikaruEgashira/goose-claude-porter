@@ -1,0 +1,38 @@
+{
+  "id": "code-review-mentor",
+  "name": "Code Review Mentor",
+  "version": "1.0.0",
+  "description": "An intelligent code review assistant that learns your preferences and provides personalized, actionable feedback on code changes with improvement suggestions",
+  "keywords": [
+    "review",
+    "analyze"
+  ],
+  "commands": "commands",
+  "environment_variables": [
+    {
+      "name": "REVIEW_SCOPE",
+      "required": false,
+      "description": "Scope of changes to review: 'staged' (staged changes), 'unstaged' (working directory), 'commit' (last commit), 'branch' (all commits in current branch vs main)"
+    },
+    {
+      "name": "REVIEW_DEPTH",
+      "required": false,
+      "description": "Review depth level: 'quick' (focus on critical issues), 'balanced' (standard review), 'thorough' (detailed analysis including documentation and tests)"
+    },
+    {
+      "name": "FOCUS_AREAS",
+      "required": false,
+      "description": "Comma-separated focus areas: 'security', 'performance', 'readability', 'testing', 'documentation', 'architecture', or 'all'"
+    },
+    {
+      "name": "LANGUAGE_SPECIFIC",
+      "required": false,
+      "description": "Optional: specify programming language for language-specific best practices (e.g., 'python', 'javascript', 'rust')"
+    },
+    {
+      "name": "PROJECT_CONTEXT",
+      "required": false,
+      "description": "Optional: brief project context or specific concerns to prioritize in this review"
+    }
+  ]
+}

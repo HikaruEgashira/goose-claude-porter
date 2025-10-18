@@ -1,0 +1,25 @@
+{
+  "id": "statistical-analyzer",
+  "name": "Statistical Analyzer",
+  "version": "1.0.0",
+  "description": "Performs comprehensive statistical analysis including descriptive statistics, distributions, correlations, and hypothesis testing",
+  "keywords": [],
+  "commands": "commands",
+  "environment_variables": [
+    {
+      "name": "DATA_FILE",
+      "required": true,
+      "description": "Path to the cleaned data file to analyze"
+    },
+    {
+      "name": "CONFIDENCE_LEVEL",
+      "required": false,
+      "description": "Confidence level for statistical tests (90, 95, 99)"
+    },
+    {
+      "name": "INCLUDE_CORRELATIONS",
+      "required": false,
+      "description": "Whether to compute correlation matrix (true/false)"
+    }
+  ]
+}

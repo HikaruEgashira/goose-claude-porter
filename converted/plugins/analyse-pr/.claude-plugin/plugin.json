@@ -1,0 +1,20 @@
+{
+  "id": "analyse-pr",
+  "name": "Analyse PR",
+  "version": "1.0.0",
+  "description": "Analyse a pr",
+  "keywords": [],
+  "commands": "commands",
+  "environment_variables": [
+    {
+      "name": "PR",
+      "required": true,
+      "description": "name of the pull request"
+    },
+    {
+      "name": "REPO",
+      "required": false,
+      "description": "name of the repo. uses the current one if not selected"
+    }
+  ]
+}

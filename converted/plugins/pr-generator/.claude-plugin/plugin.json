@@ -1,0 +1,23 @@
+{
+  "id": "pr-generator",
+  "name": "PR Generator",
+  "version": "1.0.0",
+  "description": "Automatically generate pull request descriptions based on changes in a local git repo.",
+  "keywords": [
+    "format",
+    "generate"
+  ],
+  "commands": "commands",
+  "environment_variables": [
+    {
+      "name": "GIT_REPO_PATH",
+      "required": true,
+      "description": "Path to the local git repository"
+    },
+    {
+      "name": "PUSH_PR",
+      "required": false,
+      "description": "Whether to push changes and create a PR"
+    }
+  ]
+}

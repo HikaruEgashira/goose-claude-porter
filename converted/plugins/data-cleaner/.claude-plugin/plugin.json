@@ -1,0 +1,32 @@
+{
+  "id": "data-cleaner",
+  "name": "Data Cleaner",
+  "version": "1.0.0",
+  "description": "Performs intelligent data cleaning including missing value handling, duplicate removal, and outlier treatment",
+  "keywords": [
+    "format"
+  ],
+  "commands": "commands",
+  "environment_variables": [
+    {
+      "name": "DATA_FILE",
+      "required": true,
+      "description": "Path to the data file to clean"
+    },
+    {
+      "name": "HANDLE_MISSING",
+      "required": false,
+      "description": "Strategy for missing values - options are 'remove', 'mean', 'median', 'mode', 'smart'"
+    },
+    {
+      "name": "REMOVE_DUPLICATES",
+      "required": false,
+      "description": "Whether to remove duplicate rows (true/false)"
+    },
+    {
+      "name": "OUTLIER_STRATEGY",
+      "required": false,
+      "description": "How to handle outliers - options are 'keep', 'remove', 'flag', 'cap'"
+    }
+  ]
+}

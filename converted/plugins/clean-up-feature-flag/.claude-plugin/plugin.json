@@ -1,0 +1,22 @@
+{
+  "id": "clean-up-feature-flag",
+  "name": "Clean Up Feature Flag",
+  "version": "1.0.0",
+  "description": "Automatically clean up all references of a fully rolled out feature flag from a codebase and make the new behavior the default.",
+  "keywords": [
+    "test"
+  ],
+  "commands": "commands",
+  "environment_variables": [
+    {
+      "name": "FEATURE_FLAG_KEY",
+      "required": true,
+      "description": "Key of the feature flag"
+    },
+    {
+      "name": "REPO_DIR",
+      "required": false,
+      "description": "Directory of the codebase"
+    }
+  ]
+}

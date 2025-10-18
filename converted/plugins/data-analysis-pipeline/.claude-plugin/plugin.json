@@ -1,0 +1,39 @@
+{
+  "id": "data-analysis-pipeline",
+  "name": "Data Analysis Pipeline",
+  "version": "1.0.0",
+  "description": "An advanced data analysis workflow that orchestrates multiple sub-recipes to clean, analyze, visualize, and report on datasets with intelligent format detection and conditional processing",
+  "keywords": [
+    "format",
+    "generate",
+    "validate"
+  ],
+  "commands": "commands",
+  "environment_variables": [
+    {
+      "name": "DATA_FILE",
+      "required": true,
+      "description": "Path to the data file to analyze (supports CSV, JSON, Excel, Parquet)"
+    },
+    {
+      "name": "ANALYSIS_TYPE",
+      "required": false,
+      "description": "Type of analysis - options are 'quick', 'comprehensive', 'statistical', 'exploratory'"
+    },
+    {
+      "name": "OUTPUT_DIR",
+      "required": false,
+      "description": "Directory where analysis results and visualizations will be saved"
+    },
+    {
+      "name": "INCLUDE_VISUALIZATIONS",
+      "required": false,
+      "description": "Whether to generate visualizations (true/false)"
+    },
+    {
+      "name": "REPORT_FORMAT",
+      "required": false,
+      "description": "Output report format - options are 'markdown', 'html', 'pdf'"
+    }
+  ]
+}

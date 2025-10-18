@@ -1,0 +1,548 @@
+# Claude Code Plugins - LLM Context
+
+## Overview
+Claude Code Plugins are custom collections of slash commands, agents, skills, MCP servers, and hooks that extend Claude Code's functionality. Plugins install with a single command and enable teams to customize Claude Code with shared tools, workflows, and integrations tailored to their specific needs.
+
+## Key Concept
+Plugins represent a decentralized, developer-first approach to extensibility. Instead of a centralized app store, anyone can create and host a marketplace from a Git repository, enabling true community-driven extension distribution.
+
+## Plugin Components
+
+Plugins can provide five types of components that extend Claude Code:
+
+### 1. Slash Commands
+Custom commands that integrate seamlessly with Claude Code's command system.
+
+**Characteristics:**
+- Located in `commands/` directory at plugin root
+- Stored as Markdown files with frontmatter
+- Appear in `/help` interface
+- Invoked explicitly by users with `/command-name`
+- Can define custom parameters and options
+- Support in both terminal and VS Code
+
+**Use Cases:**
+- Package management workflows
+- Code review processes
+- Testing automation
+- Documentation generation
+- Custom project setup scripts
+
+### 2. Agents (Subagents)
+Specialized AI agents that Claude can invoke automatically based on task context.
+
+**Characteristics:**
+- Located in `agents/` directory at plugin root
+- Stored as Markdown files describing capabilities
+- Described with YAML frontmatter including:
+  - `description` - What the agent specializes in
+  - `capabilities` - Array of tasks it can perform
+- Appear in `/agents` interface
+- Can be invoked manually or automatically
+- Work alongside built-in Claude agents
+
+**Agent Structure:**
+```yaml
+---
+description: "Detailed role and expertise"
+capabilities: ["task1", "task2", "task3"]
+---
+
+# Agent Name
+
+Detailed description of role and when to invoke.
+
+## Capabilities
+- Specific tasks
+- Specialized expertise
+- Integration points
+```
+
+### 3. Skills (Agent Skills)
+Model-invoked capabilities that Claude autonomously decides when to use based on task context.
+
+**Characteristics:**
+- Located in `skills/` directory at plugin root
+- Directories containing `SKILL.md` files with frontmatter
+- Automatically discovered when plugin is installed
+- Claude invokes them based on matching task context
+- Can include supporting scripts and resources
+- Format matches standalone Skills structure
+
+**Skill Structure:**
+```yaml
+---
+name: skill-identifier
+description: "Clear description of what this skill does"
+---
+
+# Skill Title
+
+Instructions and guidelines...
+
+## Examples
+- Example 1
+- Example 2
+```
+
+**Integration Behavior:**
+- Skills are discoverable automatically
+- No explicit invocation needed
+- Claude decides when to apply skill knowledge
+- Can include supporting files (scripts, templates, etc.)
+
+### 4. Hooks
+Customizable behaviors at key points in Claude Code's workflow.
+
+**Characteristics:**
+- Located in `hooks/` directory at plugin root
+- Stored as shell scripts or executables
+- Trigger at specific lifecycle events
+- Common hook types:
+  - `pre-commit` - Run before git commits
+  - `post-file-save` - Run after file modifications
+  - `on-session-start` - Initialize sessions
+  - `on-session-end` - Cleanup operations
+  - `pre-command` - Pre-process commands
+  - `post-command` - Post-process results
+
+**Use Cases:**
+- Code quality enforcement (linting, type checking)
+- Automated testing before commits
+- Environment setup and cleanup
+- Custom logging and monitoring
+- Security checks and validations
+
+### 5. MCP Servers
+External tool and API connections via the Model Context Protocol.
+
+**Characteristics:**
+- Defined in plugin.json manifest
+- Connect external services and data sources
+- Provide structured access to:
+  - Internal tools and services
+  - Databases and APIs
+  - Business logic systems
+  - Document repositories
+- Configured with connection parameters
+
+**Examples:**
+- GitHub integration
+- Slack notifications
+- Database queries
+- Internal APIs
+- Document management systems
+
+## Plugin Structure
+
+### Directory Layout
+All plugin components must be at the plugin root level:
+
+```
+my-plugin/
+├── .claude-plugin/
+│   └── plugin.json              # Plugin manifest
+├── commands/                     # Slash commands
+│   ├── command1.md
+│   └── command2.md
+├── agents/                       # Subagents
+│   ├── agent1.md
+│   └── agent2.md
+├── skills/                       # Skills
+│   ├── skill1/
+│   │   └── SKILL.md
+│   └── skill2/
+│       └── SKILL.md
+├── hooks/                        # Lifecycle hooks
+│   ├── pre-commit
+│   ├── post-file-save
+│   └── on-session-start
+└── mcp/                          # MCP server configs (optional)
+    └── server-config.json
+```
+
+**Important:** All directories (commands/, agents/, skills/, hooks/) must be at plugin root, NOT inside .claude-plugin/
+
+### Plugin Manifest (plugin.json)
+
+The `.claude-plugin/plugin.json` file defines plugin metadata and configuration.
+
+**Required Fields:**
+- `id` - Unique identifier (lowercase, hyphens allowed)
+- `name` - Human-readable plugin name
+- `version` - Plugin version (semantic versioning)
+
+**Metadata Fields:**
+- `description` - What the plugin provides
+- `author` - Plugin creator
+- `repository` - Source code location
+- `license` - Open source or commercial
+- `keywords` - Search tags
+
+**Component Path Fields:**
+- `commands` - Path to commands directory
+- `agents` - Path to agents directory
+- `skills` - Path to skills directory
+- `hooks` - Path to hooks directory
+- `mcp_servers` - Array of MCP server configurations
+
+**Complete Schema Example:**
+```json
+{
+  "id": "my-enterprise-plugin",
+  "name": "Enterprise Tools",
+  "version": "1.0.0",
+  "description": "Custom commands and workflows for enterprise teams",
+  "author": "Your Company",
+  "repository": "https://github.com/company/claude-plugin",
+  "license": "Proprietary",
+  "keywords": ["enterprise", "devops", "workflow"],
+  "commands": "commands",
+  "agents": "agents",
+  "skills": "skills",
+  "hooks": "hooks",
+  "mcp_servers": [
+    {
+      "name": "internal-api",
+      "type": "http",
+      "url": "https://api.internal.company.com"
+    }
+  ],
+  "environment_variables": [
+    {
+      "name": "API_KEY",
+      "required": true,
+      "description": "Internal API authentication token"
+    }
+  ]
+}
+```
+
+**Path Behavior Rules:**
+- All paths are relative to plugin root
+- Can customize directory names in plugin.json
+- Unset paths indicate missing component type
+- Use `.` to reference root directory if needed
+
+## Plugin Marketplaces
+
+### What are Marketplaces?
+Decentralized catalogs of plugins that make discovery and installation easy. Instead of a central app store, anyone can create and host a marketplace from a Git repository.
+
+### Marketplace Structure
+A marketplace is a JSON file listing available plugins:
+
+```json
+{
+  "version": "1.0.0",
+  "marketplace_name": "My Plugins",
+  "plugins": [
+    {
+      "name": "Plugin Name",
+      "owner": "creator",
+      "description": "What this plugin does",
+      "version": "1.0.0",
+      "source": "github.com/creator/plugin-repo",
+      "tags": ["productivity", "workflow"],
+      "strict": true
+    }
+  ]
+}
+```
+
+### Plugin Sources
+Marketplaces can reference plugins from:
+- Local paths: `"./plugins/formatter"`
+- GitHub repositories: `"github.com/user/repo"`
+- Git URLs: `"https://github.com/user/repo.git"`
+- Package managers
+
+### Strict Mode
+- `strict: true` (default) - Plugin must include plugin.json; marketplace fields supplement manifest
+- `strict: false` - plugin.json optional; marketplace entry serves as complete manifest
+
+## Installation and Usage
+
+### Installing Plugins
+```bash
+# Browse and install from marketplace
+/plugin
+
+# Add custom marketplace
+/plugin marketplace add <github-user>/<repo-name>
+
+# List installed plugins
+/plugin list
+
+# Remove plugin
+/plugin remove <plugin-id>
+```
+
+### Using Plugin Commands
+```bash
+# View available commands from plugins
+/help
+
+# Run plugin command
+/<command-name> [arguments]
+```
+
+### Environment Variables
+Plugins can require environment variables configured in:
+- `.claude/config.json` - Project-level settings
+- `~/.claude/config.json` - User-level settings
+- System environment variables
+
+## Creating Plugins
+
+### Basic Steps
+1. Create plugin directory structure
+2. Create `.claude-plugin/plugin.json` manifest
+3. Add desired components (commands, agents, skills, hooks, MCP)
+4. Test locally with `/plugin install ./local-path`
+5. Publish to Git repository
+6. Add to marketplace (optional)
+
+### Plugin Development Workflow
+
+**Local Testing:**
+```bash
+# Install plugin from local path
+/plugin install ./path/to/plugin
+
+# Test commands
+/<command-name>
+
+# View plugin details
+/plugin info <plugin-id>
+
+# Uninstall for development
+/plugin remove <plugin-id>
+```
+
+**Publishing:**
+1. Create Git repository
+2. Push plugin code
+3. Create marketplace or add to existing
+4. Share marketplace URL with team
+5. Users install via `/plugin marketplace add`
+
+### Best Practices
+- Use meaningful, descriptive IDs
+- Include comprehensive descriptions
+- Document all commands with examples
+- Test all components thoroughly
+- Version appropriately (semver)
+- Include LICENSE file
+- Add README with usage examples
+- Keep plugins focused on specific domain
+- Make dependencies explicit
+
+## Plugin Configuration
+
+### User-Level Configuration
+File: `~/.claude/config.json`
+```json
+{
+  "plugins": {
+    "marketplaces": [
+      "anthropics/skills",
+      "github-user/custom-plugins"
+    ]
+  }
+}
+```
+
+### Project-Level Configuration
+File: `.claude/config.json`
+Configured to ensure team consistency:
+```json
+{
+  "plugins": {
+    "marketplaces": ["company/standard-plugins"],
+    "required": ["company-formatter", "company-linter"]
+  }
+}
+```
+
+When team members trust the repository, Claude Code automatically:
+1. Installs specified marketplaces
+2. Installs required plugins
+3. Applies plugin configurations
+
+## Plugin Discovery and Management
+
+### Browse Plugins
+- Select "Browse Plugins" in Claude Code
+- See available plugins with descriptions
+- Check features and installation details
+- View ratings and user feedback
+
+### Search and Filter
+- Search by keyword (e.g., "testing", "documentation")
+- Filter by category (productivity, development, etc.)
+- Sort by popularity, recency, rating
+
+### Plugin Information
+Each plugin displays:
+- Description and features
+- Author and version
+- Repository link
+- Installation instructions
+- Compatibility information
+- Dependencies
+
+## Advanced Features
+
+### Plugin Composition
+Plugins can compose multiple components:
+```json
+{
+  "commands": "commands",
+  "agents": "agents",
+  "skills": "skills",
+  "hooks": "hooks",
+  "mcp_servers": [...]
+}
+```
+
+### Conditional Installation
+- Specify minimum Claude Code version
+- Declare platform requirements (terminal, VS Code)
+- Express dependencies on other plugins
+
+### Versioning and Updates
+- Semantic versioning (major.minor.patch)
+- Automatic update checks
+- Backward compatibility considerations
+- Breaking change documentation
+
+## Use Cases
+
+### Enterprise Teams
+- Enforce coding standards via hooks
+- Share internal tools via MCP servers
+- Distribute custom workflows as commands
+- Provide role-specific agents
+
+### Open Source Projects
+- Distribution of development workflows
+- Community plugin marketplace
+- Shared linting and testing configurations
+- Collaborative tool set
+
+### DevOps and Automation
+- Deployment workflow orchestration
+- Infrastructure as Code templates
+- CI/CD integration commands
+- Monitoring and logging hooks
+
+## Community and Ecosystem
+
+### Community-Created Marketplaces
+- Dan Ávila's plugin marketplace - DevOps, documentation, project management
+- Seth Hobson's subagent collection - 80+ specialized agents
+- Various team and company-specific marketplaces
+
+### Plugin Examples
+- Docker official plugins
+- Language-specific development plugins
+- Framework scaffolding plugins
+- Enterprise integration plugins
+
+## Debugging and Development Tools
+
+### Debugging Commands
+- `/plugin info <id>` - View plugin details
+- `/plugin validate` - Check plugin configuration
+- `/plugin test` - Run plugin tests
+
+### Common Issues
+- Path resolution problems
+- Environment variable not set
+- Manifest schema validation errors
+- Hook execution failures
+- MCP server connection issues
+
+### Development Tips
+- Use local installation for testing
+- Check debug logs for errors
+- Validate plugin.json before publishing
+- Test all components work together
+- Include clear error messages
+
+## Distribution and Versioning
+
+### Version Management
+- Use semantic versioning: MAJOR.MINOR.PATCH
+- Document breaking changes clearly
+- Maintain backward compatibility when possible
+- Tag releases in Git
+
+### Release Process
+1. Update version in plugin.json
+2. Update CHANGELOG
+3. Commit and tag release
+4. Push to repository
+5. Update marketplace entry if needed
+
+## Marketplace Integration
+
+### Adding to Anthropic Skills Marketplace
+Register plugin repository:
+```bash
+/plugin marketplace add anthropics/skills
+```
+
+Public plugins can be added to official marketplace through:
+1. GitHub discussions
+2. Community proposals
+3. Curator review
+
+### Custom Marketplace Hosting
+Host on GitHub or any Git server:
+```bash
+/plugin marketplace add company/plugins
+```
+
+Users can add custom marketplace with single command.
+
+## Key Differences
+
+### Plugins vs Slash Commands
+- **Slash Commands** - Simple, immediate, typed `/command`
+- **Plugins** - Complete packages with multiple component types, versioning, and distribution
+
+### Plugins vs Agents
+- **Agents** - Specialized subagents within plugins
+- **Plugins** - Container for agents, commands, skills, hooks, and MCP servers
+
+### Plugins vs Skills
+- **Skills** - Model-invoked capabilities
+- **Plugins** - Can include skills + commands, agents, hooks, and MCP integration
+
+## Getting Started
+
+1. **Browse Plugins** - Use `/plugin` to explore available plugins
+2. **Install Plugin** - `/plugin install marketplace:plugin-id`
+3. **Configure** - Set environment variables if needed
+4. **Use Commands** - Run `/help` to see new commands
+5. **Create Plugin** - Build custom plugin for your team
+
+## Resources
+
+- **Official Docs** - https://docs.claude.com/en/docs/claude-code/plugins
+- **Plugins Reference** - https://docs.claude.com/en/docs/claude-code/plugins-reference
+- **Marketplace Guide** - https://docs.claude.com/en/docs/claude-code/plugin-marketplaces
+- **Anthropic Skills** - https://github.com/anthropics/skills
+- **Community Plugins** - Various GitHub repositories and marketplaces
+
+## Summary
+
+Claude Code Plugins enable:
+- Team customization with shared tools
+- Decentralized distribution via marketplaces
+- Composition of commands, agents, skills, hooks, and MCP integrations
+- Enterprise standardization through configuration
+- Community-driven extension ecosystem
+- Flexible, developer-first approach to extensibility

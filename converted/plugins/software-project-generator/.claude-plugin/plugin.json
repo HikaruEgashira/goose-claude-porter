@@ -1,0 +1,57 @@
+{
+  "id": "software-project-generator",
+  "name": "Software Project Generator",
+  "version": "1.0.0",
+  "description": "An advanced recipe that orchestrates complete project initialization (frontend, backend, full-stack, CLI, API) with intelligent framework detection, dependency management, code quality setup, and comprehensive documentation generation",
+  "keywords": [
+    "test"
+  ],
+  "commands": "commands",
+  "environment_variables": [
+    {
+      "name": "PROJECT_NAME",
+      "required": true,
+      "description": "Name of the project to initialize (alphanumeric and dashes only)"
+    },
+    {
+      "name": "PROJECT_TYPE",
+      "required": true,
+      "description": "Type of project - options are 'fullstack', 'frontend', 'backend', 'cli', 'api'"
+    },
+    {
+      "name": "FRONTEND_FRAMEWORK",
+      "required": false,
+      "description": "Frontend framework to use (react, vue, svelte, nextjs, none)"
+    },
+    {
+      "name": "BACKEND_FRAMEWORK",
+      "required": false,
+      "description": "Backend framework to use (nodejs, python-fastapi, go, rust-actix, none)"
+    },
+    {
+      "name": "DATABASE",
+      "required": false,
+      "description": "Database to integrate (postgresql, mongodb, mysql, sqlite, none)"
+    },
+    {
+      "name": "INCLUDE_DOCKER",
+      "required": false,
+      "description": "Whether to include Docker configuration (true/false)"
+    },
+    {
+      "name": "INCLUDE_CICD",
+      "required": false,
+      "description": "Whether to include CI/CD pipeline (true/false)"
+    },
+    {
+      "name": "INCLUDE_TESTING",
+      "required": false,
+      "description": "Whether to include testing setup with unit and integration tests (true/false)"
+    },
+    {
+      "name": "BASE_DIRECTORY",
+      "required": false,
+      "description": "Base directory where the project should be created"
+    }
+  ]
+}

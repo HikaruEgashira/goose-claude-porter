@@ -1,0 +1,8 @@
+{
+  "id": "migrate-from-poetry-to-uv",
+  "name": "migrate from poetry to uv",
+  "version": "1.0.0",
+  "description": "migrate from poetry to uv",
+  "keywords": [],
+  "commands": "commands"
+}

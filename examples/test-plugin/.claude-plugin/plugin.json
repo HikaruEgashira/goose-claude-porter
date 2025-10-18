@@ -1,0 +1,38 @@
+{
+  "id": "test-automation",
+  "name": "Test Automation Suite",
+  "version": "1.0.0",
+  "description": "Comprehensive test automation and CI/CD integration for Claude Code",
+  "author": "Test Team",
+  "repository": "https://github.com/example/test-automation-plugin",
+  "license": "MIT",
+  "keywords": ["testing", "ci-cd", "automation", "quality"],
+  "commands": "commands",
+  "agents": "agents",
+  "environment_variables": [
+    {
+      "name": "TEST_FRAMEWORK",
+      "required": true,
+      "description": "Test framework to use (jest, vitest, pytest, etc)"
+    },
+    {
+      "name": "COVERAGE_THRESHOLD",
+      "required": false,
+      "description": "Minimum code coverage percentage"
+    },
+    {
+      "name": "CI_TOKEN",
+      "required": false,
+      "description": "CI/CD platform authentication token"
+    }
+  ],
+  "mcp_servers": [
+    {
+      "name": "ci-runner",
+      "config": {
+        "type": "http",
+        "endpoint": "http://localhost:3000/ci"
+      }
+    }
+  ]
+}

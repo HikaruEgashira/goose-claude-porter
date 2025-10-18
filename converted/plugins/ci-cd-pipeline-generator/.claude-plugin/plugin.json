@@ -1,0 +1,41 @@
+{
+  "id": "ci-cd-pipeline-generator",
+  "name": "CI-CD Pipeline Generator",
+  "version": "1.0.0",
+  "description": "Generates a CI-CD pipeline configuration (GitHub Actions, GitLab CI) based on project language and framework.",
+  "keywords": [
+    "test",
+    "build",
+    "deploy",
+    "analyze",
+    "generate"
+  ],
+  "commands": "commands",
+  "environment_variables": [
+    {
+      "name": "PLATFORM",
+      "required": true,
+      "description": "CI/CD platform: 'github_actions', 'gitlab_ci'."
+    },
+    {
+      "name": "PROJECT_TYPE",
+      "required": false,
+      "description": "Project type: 'nodejs', 'python', 'go', 'auto'."
+    },
+    {
+      "name": "DEPLOYMENT_TARGET",
+      "required": false,
+      "description": "Deployment: 'none', 'docker', 'serverless'."
+    },
+    {
+      "name": "BRANCH_NAME",
+      "required": false,
+      "description": "Main branch for pipeline trigger."
+    },
+    {
+      "name": "PROJECT_CONTEXT",
+      "required": false,
+      "description": "Additional context, versions or build flags."
+    }
+  ]
+}

@@ -1,0 +1,7 @@
+version: 1.0.0
+title: template-skill
+description: Replace with description of the skill and when Claude should use it.
+instructions: |
+
+  # Insert instructions below
+prompt: Apply the template-skill skill to the current task.

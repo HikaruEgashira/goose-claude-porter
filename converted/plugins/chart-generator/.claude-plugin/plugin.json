@@ -1,0 +1,37 @@
+{
+  "id": "chart-generator",
+  "name": "Chart Generator",
+  "version": "1.0.0",
+  "description": "Creates professional, publication-ready visualizations and interactive charts from data analysis results",
+  "keywords": [
+    "format"
+  ],
+  "commands": "commands",
+  "environment_variables": [
+    {
+      "name": "DATA_FILE",
+      "required": true,
+      "description": "Path to the data file to visualize"
+    },
+    {
+      "name": "CHART_STYLE",
+      "required": false,
+      "description": "Visual style - options are 'modern', 'classic', 'minimal', 'publication'"
+    },
+    {
+      "name": "COLOR_SCHEME",
+      "required": false,
+      "description": "Color palette - options are 'viridis', 'plasma', 'blues', 'greens', 'categorical'"
+    },
+    {
+      "name": "OUTPUT_FORMAT",
+      "required": false,
+      "description": "Image format - options are 'png', 'svg', 'pdf', 'html'"
+    },
+    {
+      "name": "INTERACTIVE",
+      "required": false,
+      "description": "Generate interactive visualizations using Plotly (true/false)"
+    }
+  ]
+}

@@ -1,0 +1,8 @@
+{
+  "id": "readme-bot",
+  "name": "Readme Bot",
+  "version": "1.0.0",
+  "description": "Generates or updates a readme",
+  "keywords": [],
+  "commands": "commands"
+}

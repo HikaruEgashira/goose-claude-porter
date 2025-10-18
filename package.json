@@ -1,0 +1,39 @@
+{
+  "name": "goose-claude-porter",
+  "version": "1.0.0",
+  "description": "Convert between Goose Shared Recipes and Claude Code Plugins",
+  "type": "module",
+  "main": "dist/porter.js",
+  "bin": {
+    "porter": "./porter.ts"
+  },
+  "scripts": {
+    "dev": "bun porter.ts",
+    "build": "bun build ./porter.ts --outdir dist --format esm",
+    "start": "bun ./porter.ts",
+    "test": "bun test",
+    "recipe-to-plugin": "bun porter.ts recipe-to-plugin",
+    "plugin-to-recipe": "bun porter.ts plugin-to-recipe",
+    "validate": "bun porter.ts validate-recipe",
+    "help": "bun porter.ts --help"
+  },
+  "dependencies": {
+    "js-yaml": "^4.1.0"
+  },
+  "devDependencies": {
+    "@types/bun": "latest",
+    "@types/js-yaml": "^4.0.5"
+  },
+  "keywords": [
+    "goose",
+    "claude-code",
+    "recipes",
+    "plugins",
+    "converter",
+    "porter",
+    "workflow",
+    "automation"
+  ],
+  "author": "Your Name",
+  "license": "MIT"
+}

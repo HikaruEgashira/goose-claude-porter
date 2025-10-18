@@ -1,0 +1,335 @@
+{
+  "timestamp": "2025-10-18T12:35:53.090Z",
+  "sources": {
+    "gooseRecipes": "/tmp/goose/documentation/src/pages/recipes/data/recipes",
+    "skills": "/tmp/skills"
+  },
+  "outputs": {
+    "plugins": "./converted-plugins",
+    "recipes": "./converted-recipes"
+  },
+  "summary": {
+    "recipes": {
+      "total": 28,
+      "successful": 28,
+      "failed": 0,
+      "skipped": 0,
+      "results": [
+        {
+          "source": "/tmp/goose/documentation/src/pages/recipes/data/recipes/daily-standup-report-generator.yaml",
+          "target": "converted-plugins/daily-standup-report-generator",
+          "status": "success",
+          "message": "Converted: Daily Standup Report Generator",
+          "time": 23
+        },
+        {
+          "source": "/tmp/goose/documentation/src/pages/recipes/data/recipes/clean-up-feature-flag.yaml",
+          "target": "converted-plugins/clean-up-feature-flag",
+          "status": "success",
+          "message": "Converted: Clean Up Feature Flag",
+          "time": 18
+        },
+        {
+          "source": "/tmp/goose/documentation/src/pages/recipes/data/recipes/analyze-pr.yaml",
+          "target": "converted-plugins/analyse-pr",
+          "status": "success",
+          "message": "Converted: Analyse PR",
+          "time": 18
+        },
+        {
+          "source": "/tmp/goose/documentation/src/pages/recipes/data/recipes/create-kafka-topic.yaml",
+          "target": "converted-plugins/create-kafka-topic",
+          "status": "success",
+          "message": "Converted: Create Kafka Topic",
+          "time": 20
+        },
+        {
+          "source": "/tmp/goose/documentation/src/pages/recipes/data/recipes/use-openmetadata.yaml",
+          "target": "converted-plugins/use-openmetadata",
+          "status": "success",
+          "message": "Converted: Use OpenMetadata",
+          "time": 18
+        },
+        {
+          "source": "/tmp/goose/documentation/src/pages/recipes/data/recipes/migrate-from-poetry-to-uv.yaml",
+          "target": "converted-plugins/migrate-from-poetry-to-uv",
+          "status": "success",
+          "message": "Converted: migrate from poetry to uv",
+          "time": 18
+        },
+        {
+          "source": "/tmp/goose/documentation/src/pages/recipes/data/recipes/migrate-cypress-test-to-playwright.yaml",
+          "target": "converted-plugins/migrate-cypress-tests-to-playwright",
+          "status": "success",
+          "message": "Converted: Migrate Cypress tests to Playwright",
+          "time": 17
+        },
+        {
+          "source": "/tmp/goose/documentation/src/pages/recipes/data/recipes/pull-request-generator.yaml",
+          "target": "converted-plugins/pr-generator",
+          "status": "success",
+          "message": "Converted: PR Generator",
+          "time": 18
+        },
+        {
+          "source": "/tmp/goose/documentation/src/pages/recipes/data/recipes/ci-cd-pipeline.yaml",
+          "target": "converted-plugins/ci-cd-pipeline-generator",
+          "status": "success",
+          "message": "Converted: CI-CD Pipeline Generator",
+          "time": 19
+        },
+        {
+          "source": "/tmp/goose/documentation/src/pages/recipes/data/recipes/code-review-mentor.yaml",
+          "target": "converted-plugins/code-review-mentor",
+          "status": "success",
+          "message": "Converted: Code Review Mentor",
+          "time": 18
+        },
+        {
+          "source": "/tmp/goose/documentation/src/pages/recipes/data/recipes/dependency-updater.yaml",
+          "target": "converted-plugins/dependency-updater",
+          "status": "success",
+          "message": "Converted: Dependency Updater",
+          "time": 18
+        },
+        {
+          "source": "/tmp/goose/documentation/src/pages/recipes/data/recipes/smart-task-organizer.yaml",
+          "target": "converted-plugins/smart-task-organizer",
+          "status": "success",
+          "message": "Converted: Smart Task Organizer",
+          "time": 18
+        },
+        {
+          "source": "/tmp/goose/documentation/src/pages/recipes/data/recipes/change-log.yaml",
+          "target": "converted-plugins/generate-change-logs-from-git-commits",
+          "status": "success",
+          "message": "Converted: Generate Change Logs from Git Commits",
+          "time": 17
+        },
+        {
+          "source": "/tmp/goose/documentation/src/pages/recipes/data/recipes/readme-bot.yaml",
+          "target": "converted-plugins/readme-bot",
+          "status": "success",
+          "message": "Converted: Readme Bot",
+          "time": 18
+        },
+        {
+          "source": "/tmp/goose/documentation/src/pages/recipes/data/recipes/messy-column-fixer.yaml",
+          "target": "converted-plugins/messy-column-fixer",
+          "status": "success",
+          "message": "Converted: Messy Column Fixer",
+          "time": 17
+        },
+        {
+          "source": "/tmp/goose/documentation/src/pages/recipes/data/recipes/data-analysis-pipeline.yaml",
+          "target": "converted-plugins/data-analysis-pipeline",
+          "status": "success",
+          "message": "Converted: Data Analysis Pipeline",
+          "time": 19
+        },
+        {
+          "source": "/tmp/goose/documentation/src/pages/recipes/data/recipes/remove-ai-artifacts-from-python-code.yaml",
+          "target": "converted-plugins/python-un-ai",
+          "status": "success",
+          "message": "Converted: Python un-AI",
+          "time": 17
+        },
+        {
+          "source": "/tmp/goose/documentation/src/pages/recipes/data/recipes/full-stack-project-initializer.yaml",
+          "target": "converted-plugins/software-project-generator",
+          "status": "success",
+          "message": "Converted: Software Project Generator",
+          "time": 18
+        },
+        {
+          "source": "/tmp/goose/documentation/src/pages/recipes/data/recipes/sunno-song-format-generator.yaml",
+          "target": "converted-plugins/sunno-song-format-generator",
+          "status": "success",
+          "message": "Converted: Sunno Song Format Generator",
+          "time": 17
+        },
+        {
+          "source": "/tmp/goose/documentation/src/pages/recipes/data/recipes/lint-my-code.yaml",
+          "target": "converted-plugins/lint-my-code",
+          "status": "success",
+          "message": "Converted: Lint My Code",
+          "time": 18
+        },
+        {
+          "source": "/tmp/goose/documentation/src/pages/recipes/data/recipes/dev-guide-migration.yaml",
+          "target": "converted-plugins/dev-guide-migration-from-a-specific-file-or-files-in-a-directory",
+          "status": "success",
+          "message": "Converted: dev guide migration from a specific file or files in a directory",
+          "time": 17
+        },
+        {
+          "source": "/tmp/goose/documentation/src/pages/recipes/data/recipes/pr-demo-planner.yaml",
+          "target": "converted-plugins/pr-demo-planner",
+          "status": "success",
+          "message": "Converted: PR Demo Planner",
+          "time": 18
+        },
+        {
+          "source": "/tmp/goose/documentation/src/pages/recipes/data/recipes/subrecipes/statistical-analyzer.yaml",
+          "target": "converted-plugins/statistical-analyzer",
+          "status": "success",
+          "message": "Converted: Statistical Analyzer",
+          "time": 17
+        },
+        {
+          "source": "/tmp/goose/documentation/src/pages/recipes/data/recipes/subrecipes/data-validator.yaml",
+          "target": "converted-plugins/data-validator",
+          "status": "success",
+          "message": "Converted: Data Validator",
+          "time": 18
+        },
+        {
+          "source": "/tmp/goose/documentation/src/pages/recipes/data/recipes/subrecipes/chart-generator.yaml",
+          "target": "converted-plugins/chart-generator",
+          "status": "success",
+          "message": "Converted: Chart Generator",
+          "time": 18
+        },
+        {
+          "source": "/tmp/goose/documentation/src/pages/recipes/data/recipes/subrecipes/data-cleaner.yaml",
+          "target": "converted-plugins/data-cleaner",
+          "status": "success",
+          "message": "Converted: Data Cleaner",
+          "time": 17
+        },
+        {
+          "source": "/tmp/goose/documentation/src/pages/recipes/data/recipes/recipe-generator.yaml",
+          "target": "converted-plugins/recipe-generator",
+          "status": "success",
+          "message": "Converted: Recipe Generator",
+          "time": 17
+        },
+        {
+          "source": "/tmp/goose/documentation/src/pages/recipes/data/recipes/code-documentation-generator.yaml",
+          "target": "converted-plugins/code-documentation-generator",
+          "status": "success",
+          "message": "Converted: Code Documentation Generator",
+          "time": 18
+        }
+      ]
+    },
+    "skills": {
+      "total": 15,
+      "successful": 15,
+      "failed": 0,
+      "skipped": 0,
+      "results": [
+        {
+          "source": "/tmp/skills/document-skills/xlsx",
+          "target": "converted-recipes/xlsx.yaml",
+          "status": "success",
+          "message": "Converted skill to recipe: xlsx",
+          "time": 1
+        },
+        {
+          "source": "/tmp/skills/document-skills/pdf",
+          "target": "converted-recipes/pdf.yaml",
+          "status": "success",
+          "message": "Converted skill to recipe: pdf",
+          "time": 0
+        },
+        {
+          "source": "/tmp/skills/document-skills/pptx",
+          "target": "converted-recipes/pptx.yaml",
+          "status": "success",
+          "message": "Converted skill to recipe: pptx",
+          "time": 1
+        },
+        {
+          "source": "/tmp/skills/document-skills/docx",
+          "target": "converted-recipes/docx.yaml",
+          "status": "success",
+          "message": "Converted skill to recipe: docx",
+          "time": 0
+        },
+        {
+          "source": "/tmp/skills/template-skill",
+          "target": "converted-recipes/template-skill.yaml",
+          "status": "success",
+          "message": "Converted skill to recipe: template-skill",
+          "time": 0
+        },
+        {
+          "source": "/tmp/skills/theme-factory",
+          "target": "converted-recipes/theme-factory.yaml",
+          "status": "success",
+          "message": "Converted skill to recipe: theme-factory",
+          "time": 1
+        },
+        {
+          "source": "/tmp/skills/algorithmic-art",
+          "target": "converted-recipes/algorithmic-art.yaml",
+          "status": "success",
+          "message": "Converted skill to recipe: algorithmic-art",
+          "time": 0
+        },
+        {
+          "source": "/tmp/skills/internal-comms",
+          "target": "converted-recipes/internal-comms.yaml",
+          "status": "success",
+          "message": "Converted skill to recipe: internal-comms",
+          "time": 0
+        },
+        {
+          "source": "/tmp/skills/skill-creator",
+          "target": "converted-recipes/skill-creator.yaml",
+          "status": "success",
+          "message": "Converted skill to recipe: skill-creator",
+          "time": 0
+        },
+        {
+          "source": "/tmp/skills/canvas-design",
+          "target": "converted-recipes/canvas-design.yaml",
+          "status": "success",
+          "message": "Converted skill to recipe: canvas-design",
+          "time": 1
+        },
+        {
+          "source": "/tmp/skills/slack-gif-creator",
+          "target": "converted-recipes/slack-gif-creator.yaml",
+          "status": "success",
+          "message": "Converted skill to recipe: slack-gif-creator",
+          "time": 0
+        },
+        {
+          "source": "/tmp/skills/artifacts-builder",
+          "target": "converted-recipes/artifacts-builder.yaml",
+          "status": "success",
+          "message": "Converted skill to recipe: artifacts-builder",
+          "time": 0
+        },
+        {
+          "source": "/tmp/skills/webapp-testing",
+          "target": "converted-recipes/webapp-testing.yaml",
+          "status": "success",
+          "message": "Converted skill to recipe: webapp-testing",
+          "time": 0
+        },
+        {
+          "source": "/tmp/skills/mcp-builder",
+          "target": "converted-recipes/mcp-builder.yaml",
+          "status": "success",
+          "message": "Converted skill to recipe: mcp-builder",
+          "time": 0
+        },
+        {
+          "source": "/tmp/skills/brand-guidelines",
+          "target": "converted-recipes/brand-guidelines.yaml",
+          "status": "success",
+          "message": "Converted skill to recipe: brand-guidelines",
+          "time": 1
+        }
+      ]
+    }
+  },
+  "statistics": {
+    "totalDuration": 0.512,
+    "totalItems": 43,
+    "successRate": 100
+  }
+}

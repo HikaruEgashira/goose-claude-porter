@@ -1,0 +1,48 @@
+{
+  "id": "code-documentation-generator",
+  "name": "Code Documentation Generator",
+  "version": "1.0.0",
+  "description": "Automatically generates comprehensive documentation for codebases by analyzing source files, extracting APIs, and creating formatted documentation with examples and best practices",
+  "keywords": [
+    "review",
+    "test",
+    "build",
+    "format",
+    "analyze",
+    "generate",
+    "validate"
+  ],
+  "commands": "commands",
+  "environment_variables": [
+    {
+      "name": "SOURCE_PATH",
+      "required": false,
+      "description": "Path to the source code directory or specific file to document"
+    },
+    {
+      "name": "DOC_FORMAT",
+      "required": false,
+      "description": "Documentation format: 'markdown', 'html', 'restructuredtext', 'javadoc', 'jsdoc'"
+    },
+    {
+      "name": "INCLUDE_EXAMPLES",
+      "required": false,
+      "description": "Whether to generate usage examples for documented items (true/false)"
+    },
+    {
+      "name": "OUTPUT_LOCATION",
+      "required": false,
+      "description": "Directory where documentation files will be saved"
+    },
+    {
+      "name": "DOC_STYLE",
+      "required": false,
+      "description": "Documentation style: 'minimal' (brief descriptions), 'standard' (descriptions + params), 'comprehensive' (full with examples and cross-refs)"
+    },
+    {
+      "name": "LANGUAGE_HINT",
+      "required": false,
+      "description": "Optional: specify programming language if auto-detection is insufficient (e.g., 'python', 'javascript', 'rust', 'go')"
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "id": "lint-my-code",
+  "name": "Lint My Code",
+  "version": "1.0.0",
+  "description": "Analyzes code files for syntax and layout issues using available linting tools",
+  "keywords": [],
+  "commands": "commands",
+  "environment_variables": [
+    {
+      "name": "FILE_PATH",
+      "required": true,
+      "description": "Path to the file you want to lint"
+    }
+  ]
+}

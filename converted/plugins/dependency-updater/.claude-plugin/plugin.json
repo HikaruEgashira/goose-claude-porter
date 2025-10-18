@@ -1,0 +1,25 @@
+{
+  "id": "dependency-updater",
+  "name": "Dependency Updater",
+  "version": "1.0.0",
+  "description": "Automatically checks for outdated dependencies in a project.",
+  "keywords": [],
+  "commands": "commands",
+  "environment_variables": [
+    {
+      "name": "PROJECT_PATH",
+      "required": false,
+      "description": "Path to the project directory to check for dependencies"
+    },
+    {
+      "name": "UPDATE_MODE",
+      "required": false,
+      "description": "Mode of operation: 'report' (default) to only report outdated dependencies, 'suggest' to suggest update commands, 'interactive' to prompt before suggesting updates"
+    },
+    {
+      "name": "PACKAGE_FILTER",
+      "required": false,
+      "description": "Optional filter to check specific packages only (comma-separated list, e.g., 'react,lodash')"
+    }
+  ]
+}

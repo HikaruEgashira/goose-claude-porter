@@ -1,0 +1,49 @@
+{
+  "id": "daily-standup-report-generator",
+  "name": "Daily Standup Report Generator",
+  "version": "1.0.0",
+  "description": "Automates daily standup report creation by fetching PR status, issue progress, and commit activity directly from GitHub via OAuth - generates formatted reports stored in ./standup/ folder for team communication and historical tracking",
+  "keywords": [
+    "review",
+    "format",
+    "generate"
+  ],
+  "commands": "commands",
+  "environment_variables": [
+    {
+      "name": "GITHUB_OWNER",
+      "required": true,
+      "description": "GitHub repository owner/organization (e.g., 'ARYPROGRAMMER', 'block')"
+    },
+    {
+      "name": "GITHUB_REPO",
+      "required": true,
+      "description": "GitHub repository name (e.g., 'goose')"
+    },
+    {
+      "name": "TIME_PERIOD",
+      "required": false,
+      "description": "Time period to analyze: '24h' (last 24 hours), '48h', 'week'"
+    },
+    {
+      "name": "INCLUDE_PRS",
+      "required": false,
+      "description": "Include PR status in the report (true/false)"
+    },
+    {
+      "name": "INCLUDE_ISSUES",
+      "required": false,
+      "description": "Include issue progress in the report (true/false)"
+    },
+    {
+      "name": "OUTPUT_FORMAT",
+      "required": false,
+      "description": "Report format: 'markdown', 'slack', 'text', 'json'"
+    },
+    {
+      "name": "TEAM_CHANNEL",
+      "required": false,
+      "description": "Team channel name to mention in the report (e.g., '#engineering')"
+    }
+  ]
+}

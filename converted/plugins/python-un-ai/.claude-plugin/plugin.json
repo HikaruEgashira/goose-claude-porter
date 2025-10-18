@@ -1,0 +1,15 @@
+{
+  "id": "python-un-ai",
+  "name": "Python un-AI",
+  "version": "1.0.0",
+  "description": "Remove typical AI artifacts from Python code",
+  "keywords": [],
+  "commands": "commands",
+  "environment_variables": [
+    {
+      "name": "FILE_NAME",
+      "required": true,
+      "description": "the full path to the python file you want to sanitize"
+    }
+  ]
+}

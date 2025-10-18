@@ -1,0 +1,381 @@
+# Goose Shared Recipes - LLM Context
+
+## Overview
+Goose Recipes are reusable workflows that package extensions, prompts, and settings together. Recipes allow teams to share proven workflows, reproduce successful results consistently, and distribute AI agent configurations. Shareable recipes can be sent to teammates for execution via URL or file.
+
+## Core Concept
+
+### What are Recipes?
+Recipes are single files (YAML or JSON) that contain:
+- Session configuration and setup
+- Custom instructions and prompts
+- Goal definitions
+- Extensions and tools
+- MCP server configurations
+- Parameters and variables
+- Sub-recipes for specialized tasks
+
+### Purpose
+- Share proven AI workflows with teams
+- Reproduce consistent results
+- Automate recurring tasks
+- Package expertise as reusable modules
+- Enable non-technical users to leverage AI agents
+
+## Recipe File Formats
+
+### Supported Formats
+- **YAML** (recommended) - Human-readable, easier to edit
+- **JSON** - Programmatic generation, structured data
+
+### File Naming
+- `recipe.yaml` or `recipe.json`
+- `<recipe_name>.yaml` or `<recipe_name>.json`
+
+## Two Recipe Format Types
+
+### CLI Format
+Recipe fields at root level (created via CLI `/recipe` command):
+```yaml
+version: "1.0.0"
+title: "Code Review Assistant"
+description: "Automated code review with best practices"
+instructions: "You are a code reviewer..."
+prompt: "Review the code in this repository"
+extensions: []
+```
+
+### Desktop Format
+Recipe fields nested under `recipe` object (created from Goose Desktop):
+```yaml
+name: "Code Review Assistant"
+recipe:
+  version: "1.0.0"
+  title: "Code Review Assistant"
+  description: "Automated code review"
+  instructions: "You are a code reviewer..."
+```
+
+Both formats are auto-detected and supported by CLI commands and Desktop app.
+
+## Recipe Structure & Fields
+
+### Metadata
+- `version` - Recipe format version (e.g., "1.0.0")
+- `title` - Human-readable recipe name
+- `description` - Short description of recipe purpose
+- `name` - Display name in Desktop format
+
+### Configuration
+- `instructions` - System instructions/prompt engineering for the AI
+- `prompt` - Initial task or goal for the AI
+- `extensions` - Array of enabled extensions
+- `mcp_servers` - Model Context Protocol servers to load
+
+### Advanced Features
+- `parameters` - Input variables that users can customize
+- `subrecipes` - Recipes that run as subtasks
+- `retry_logic` - Automatic retry configuration for robustness
+- `environment_variables` - Runtime environment configuration
+
+## Sharing Recipes
+
+### Methods
+1. **File Sharing** - Send recipe file directly (YAML or JSON)
+2. **URL Sharing** - Generate shareable Deeplink for Desktop app
+3. **Recipe Generator** - Interactive tool to create shareable URLs
+4. **Git Repository** - Version control and team collaboration
+
+### Desktop Import
+- Desktop users can import YAML recipes directly
+- Supports both CLI and Desktop format
+- One-click session launch from URL
+
+### CLI Execution
+```bash
+goose run --recipe <FILE>        # Run YAML or JSON recipe
+goose recipe validate <FILE>     # Validate recipe format
+goose recipe export              # Export current session as recipe
+```
+
+## Shareable Recipes Details
+
+### What Can Be Shared
+- Complete session setup including tools and goals
+- Custom system instructions and prompts
+- Pre-configured extensions and MCP servers
+- Parameter templates for user input
+
+### Distribution Options
+1. **Direct File** - Email or version control system
+2. **Deeplink URL** - Click to launch in Desktop app
+3. **Recipe Generator Tool** - Interactive web UI at `/recipe-generator`
+4. **GitHub Repository** - Public/private repo hosting
+
+### Recipient Requirements
+- **Desktop users** - Click link or import YAML file
+- **CLI users** - Run `goose run --recipe <FILE>`
+- **No installation needed** - Uses existing Goose installation
+
+## Recipe Parameters & Variables
+
+### Input Parameters
+Define user-customizable values:
+```yaml
+parameters:
+  - name: repository_path
+    description: "Path to repository to review"
+    type: string
+    required: true
+```
+
+### Environment Variables
+Configure runtime behavior:
+```yaml
+environment_variables:
+  DEBUG: "false"
+  MODEL: "claude-3-5-sonnet"
+```
+
+### Variable Usage
+Recipes can template values for dynamic execution
+
+## Subrecipes for Complex Workflows
+
+### Single Subrecipe
+Recipe that delegates specific tasks to another recipe:
+```yaml
+subrecipes:
+  - recipe: "code-formatter.yaml"
+    wait_for_completion: true
+```
+
+### Parallel Subrecipes
+Run multiple subrecipe instances concurrently:
+```yaml
+subrecipes:
+  - recipe: "test-unit.yaml"
+    instances: 3
+  - recipe: "test-integration.yaml"
+    instances: 2
+```
+
+### Use Cases
+- Code review then formatting workflow
+- Parallel testing (unit, integration, e2e)
+- Multi-step deployment pipelines
+- Specialized task decomposition
+
+## Advanced Features
+
+### Retry Logic
+Automatically attempt task completion multiple times:
+```yaml
+retry_config:
+  max_attempts: 3
+  delay_seconds: 5
+  backoff_multiplier: 2
+```
+
+Benefits:
+- Ensures successful completion of critical tasks
+- Handles transient failures
+- Useful for CI/CD automation
+
+### Extensions Integration
+Enable specific tools and capabilities:
+```yaml
+extensions:
+  - github-connector
+  - slack-notifier
+  - database-query-tool
+```
+
+### MCP Server Integration
+Connect external services and APIs:
+```yaml
+mcp_servers:
+  - name: github
+    config: {...}
+  - name: stripe
+    config: {...}
+```
+
+## Recipe Workflow Examples
+
+### Code Review Recipe
+1. Load repository context
+2. Analyze code quality
+3. Provide detailed feedback
+4. Generate formatted report
+
+### Data Analysis Recipe
+1. Load dataset from database
+2. Run statistical analysis
+3. Generate visualizations
+4. Export results
+
+### Multi-Step Automation
+1. Run unit tests (parallel)
+2. Run integration tests (parallel)
+3. Deploy on success
+4. Notify team on completion
+
+## Recipe Tools & Resources
+
+### Recipe Generator
+- Interactive web tool: `https://block.github.io/goose/recipe-generator`
+- URL Format - Generate shareable deeplinks
+- YAML Format - Generate recipe files
+- Visual interface for non-technical users
+
+### Recipe Cookbook
+- Collection of ready-to-use recipes
+- URL: `https://block.github.io/goose/recipes`
+- Browse common development scenarios
+- Adapt recipes for specific needs
+
+### Deeplink Generator
+- Create shareable links from recipe configurations
+- URL: `https://block.github.io/goose/deeplink-generator`
+- Desktop app opens recipe with single click
+
+## Storing & Organizing Recipes
+
+### Local Storage
+- Save recipes in project directory
+- Version control via Git
+- Organize in `recipes/` folder
+
+### Sharing Approaches
+1. **Team Repository** - Centralized recipe collection
+2. **Project Repository** - Recipe with project code
+3. **Dedicated Package** - Shareable recipe package
+4. **Public Registry** - Community recipe sharing
+
+### Best Practices
+- Version recipes alongside code
+- Document parameter requirements
+- Test recipes before sharing
+- Maintain compatibility with Goose versions
+
+## Recipe Validation & Testing
+
+### CLI Commands
+```bash
+goose recipe validate <FILE>      # Check syntax and format
+goose run --recipe <FILE>         # Execute and test
+goose recipe export               # Export current session
+```
+
+### Testing Steps
+1. Validate YAML/JSON syntax
+2. Test with sample parameters
+3. Verify extensions load correctly
+4. Confirm MCP servers connect
+5. Validate output/results
+
+## Common Use Cases
+
+### Development Workflows
+- Automated code review
+- Test suite execution
+- Documentation generation
+- Dependency updates
+
+### Data Operations
+- Data extraction and transformation
+- Report generation
+- Analysis automation
+- Data quality checks
+
+### Deployment & DevOps
+- Infrastructure provisioning
+- Configuration management
+- Deployment pipelines
+- Health checks and monitoring
+
+### Team Collaboration
+- Onboarding workflows
+- Knowledge transfer
+- Standard processes
+- Quality assurance
+
+## Recipe Composition Patterns
+
+### Sequential Tasks
+Run recipes one after another in defined order
+
+### Parallel Execution
+Run multiple subrecipe instances simultaneously for efficiency
+
+### Conditional Logic
+Execute different recipes based on parameters or outcomes
+
+### Error Handling
+Retry logic and fallback recipes for robustness
+
+## Documentation & Examples
+
+### Official Resources
+- Recipes Guide: `https://block.github.io/goose/docs/guides/recipes/`
+- Recipe Reference: Detailed technical documentation
+- Recipe Tutorial: Learn recipe creation step-by-step
+- Subrecipes Guide: Complex workflow patterns
+
+### Featured Resources
+- "Championship Driven Development" - Team efficiency recipes
+- "A Recipe for Success" - Value of scaling workflows
+- Advanced Tips Video - Professional recipe techniques
+- Headless Goose Tutorial - Scheduling parallel subagents
+
+## Differences from Other Goose Features
+
+### Recipes vs Sessions
+- Sessions: Single interactive conversation
+- Recipes: Reusable, shareable, automated workflows
+
+### Recipes vs Subagents
+- Subagents: Separate AI agents with their own context
+- Recipes: Workflow orchestration within a single session
+
+### Recipes vs Extensions
+- Extensions: Tools and capabilities
+- Recipes: Workflows that use extensions
+
+## Enterprise & Team Features
+
+### Sharing at Scale
+- Centralized recipe repositories
+- Team access control
+- Version management
+- Usage tracking
+
+### Customization
+- Parameter templates
+- Environment configuration
+- Per-organization extensions
+- Custom MCP servers
+
+### Quality Assurance
+- Validation frameworks
+- Testing before distribution
+- Documentation requirements
+- Update procedures
+
+## Getting Started
+
+1. **Explore Recipes** - Browse Recipe Cookbook
+2. **Use Recipe Generator** - Create first recipe interactively
+3. **Run Recipe** - Execute with `goose run --recipe <FILE>`
+4. **Share Recipe** - Generate deeplink or send file
+5. **Iterate** - Refine based on feedback
+
+## Key Takeaways
+
+- Recipes package complete Goose configurations for sharing
+- Easy to create and distribute to team members
+- Support both CLI and Desktop workflows
+- Enable automation of complex, multi-step processes
+- Provide reusable, documented workflows
+- Scale expertise across teams and organizations

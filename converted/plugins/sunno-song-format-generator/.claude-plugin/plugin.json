@@ -1,0 +1,11 @@
+{
+  "id": "sunno-song-format-generator",
+  "name": "Sunno Song Format Generator",
+  "version": "1.0.0",
+  "description": "Generates a prompt for Sunno v4.5+",
+  "keywords": [
+    "build",
+    "format"
+  ],
+  "commands": "commands"
+}

@@ -1,0 +1,20 @@
+{
+  "id": "data-validator",
+  "name": "Data Validator",
+  "version": "1.0.0",
+  "description": "Validates data file format, structure, and integrity with comprehensive error checking",
+  "keywords": [],
+  "commands": "commands",
+  "environment_variables": [
+    {
+      "name": "DATA_FILE",
+      "required": true,
+      "description": "Path to the data file to validate"
+    },
+    {
+      "name": "VALIDATION_LEVEL",
+      "required": false,
+      "description": "Depth of validation - options are 'quick', 'standard', 'comprehensive'"
+    }
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "id": "dev-guide-migration-from-a-specific-file-or-files-in-a-directory",
+  "name": "dev guide migration from a specific file or files in a directory",
+  "version": "1.0.0",
+  "description": "dev guide migration from a specific file or files in a directory",
+  "keywords": [],
+  "commands": "commands",
+  "environment_variables": [
+    {
+      "name": "SOURCE_FILE",
+      "required": true,
+      "description": "the source file(s) or the folder to migrate"
+    },
+    {
+      "name": "TARGET_FOLDER",
+      "required": true,
+      "description": "the target folder to migrate"
+    },
+    {
+      "name": "EXAMPLE_FILE",
+      "required": true,
+      "description": "the example file to follow the doc format"
+    },
+    {
+      "name": "SIDEBAR_FILE",
+      "required": true,
+      "description": "the sidebar file to add the new doc page"
+    }
+  ]
+}

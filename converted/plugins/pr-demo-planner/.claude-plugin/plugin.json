@@ -1,0 +1,18 @@
+{
+  "id": "pr-demo-planner",
+  "name": "PR Demo Planner",
+  "version": "1.0.0",
+  "description": "Transforms technical Pull Requests into effective demonstrations that showcase functionality and value",
+  "keywords": [
+    "test",
+    "format"
+  ],
+  "commands": "commands",
+  "environment_variables": [
+    {
+      "name": "PR_URL",
+      "required": true,
+      "description": "The URL of the PR to convert into a demo."
+    }
+  ]
+}

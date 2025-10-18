@@ -1,0 +1,22 @@
+{
+  "id": "generate-change-logs-from-git-commits",
+  "name": "Generate Change Logs from Git Commits",
+  "version": "1.0.0",
+  "description": "Generate Change Logs from Git Commits",
+  "keywords": [
+    "generate"
+  ],
+  "commands": "commands",
+  "environment_variables": [
+    {
+      "name": "START_SHA",
+      "required": true,
+      "description": "the start sha of the git commits"
+    },
+    {
+      "name": "END_SHA",
+      "required": true,
+      "description": "the end sha of the git commits"
+    }
+  ]
+}

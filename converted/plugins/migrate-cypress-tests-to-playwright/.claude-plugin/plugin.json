@@ -1,0 +1,22 @@
+{
+  "id": "migrate-cypress-tests-to-playwright",
+  "name": "Migrate Cypress tests to Playwright",
+  "version": "1.0.0",
+  "description": "Migrate Cypress tests to Playwright",
+  "keywords": [
+    "test"
+  ],
+  "commands": "commands",
+  "environment_variables": [
+    {
+      "name": "CYPRESS_TEST_FILE",
+      "required": true,
+      "description": "The specific Cypress test file to migrate (e.g., cypress/e2e/login.cy.js)"
+    },
+    {
+      "name": "TARGET_DIRECTORY",
+      "required": true,
+      "description": "The target directory where the Playwright test should be created"
+    }
+  ]
+}
