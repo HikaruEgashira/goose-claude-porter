@@ -1,0 +1,12 @@
+{
+  "version": "1.0.0",
+  "id": "image-processing",
+  "name": "Image Processing",
+  "description": "Image Processing for Claude Code",
+  "category": "custom",
+  "capabilities": [
+    "image-processing"
+  ],
+  "environment_variables": [],
+  "mcp_servers": []
+}

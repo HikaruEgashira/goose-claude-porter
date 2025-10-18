@@ -8,14 +8,14 @@
     "porter": "./porter.ts"
   },
   "scripts": {
-    "dev": "bun porter.ts",
-    "build": "bun build ./porter.ts --outdir dist --format esm",
-    "start": "bun ./porter.ts",
+    "dev": "bun src/porter.ts",
+    "build": "bun build ./src/porter.ts --outdir dist --format esm",
+    "start": "bun ./src/porter.ts",
     "test": "bun test",
-    "recipe-to-plugin": "bun porter.ts recipe-to-plugin",
-    "plugin-to-recipe": "bun porter.ts plugin-to-recipe",
-    "validate": "bun porter.ts validate-recipe",
-    "help": "bun porter.ts --help"
+    "recipe-to-plugin": "bun src/porter.ts recipe-to-plugin",
+    "plugin-to-recipe": "bun src/porter.ts plugin-to-recipe",
+    "validate": "bun src/porter.ts validate-recipe",
+    "help": "bun src/porter.ts --help"
   },
   "dependencies": {
     "js-yaml": "^4.1.0"

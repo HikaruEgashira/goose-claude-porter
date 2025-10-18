@@ -207,7 +207,7 @@ function normalizeSubrecipes(
   });
 }
 
-// Claude Code Plugin Generator
+// Claude Code Plugin Generator with multi-component support
 function recipeToPlugin(recipe: GooseRecipe, outputDir: string): void {
   const pluginId = normalizeId(recipe.title);
   const pluginDir = path.join(outputDir, pluginId);
@@ -217,7 +217,12 @@ function recipeToPlugin(recipe: GooseRecipe, outputDir: string): void {
   fs.mkdirSync(path.join(pluginDir, ".claude-plugin"), { recursive: true });
   fs.mkdirSync(path.join(pluginDir, "commands"), { recursive: true });
 
-  // Generate plugin manifest
+  // Create agents directory if subrecipes exist
+  if (recipe.subrecipes && recipe.subrecipes.length > 0) {
+    fs.mkdirSync(path.join(pluginDir, "agents"), { recursive: true });
+  }
+
+  // Generate plugin manifest with multi-component support
   const manifest: PluginManifest = {
     id: pluginId,
     name: recipe.title,
@@ -231,6 +236,11 @@ function recipeToPlugin(recipe: GooseRecipe, outputDir: string): void {
       description: param.description,
     })),
   };
+
+  // Add agents if subrecipes exist
+  if (recipe.subrecipes && recipe.subrecipes.length > 0) {
+    manifest.agents = "agents";
+  }
 
   if (recipe.mcp_servers && recipe.mcp_servers.length > 0) {
     manifest.mcp_servers = recipe.mcp_servers.map((server, idx) => ({
@@ -251,13 +261,62 @@ function recipeToPlugin(recipe: GooseRecipe, outputDir: string): void {
     commandContent
   );
 
+  // Generate subagents from subrecipes
+  if (recipe.subrecipes && recipe.subrecipes.length > 0) {
+    generateSubagentsFromSubrecipes(recipe.subrecipes, pluginDir);
+  }
+
   // Generate README
   const readme = generateReadme(recipe, pluginId);
   fs.writeFileSync(path.join(pluginDir, "README.md"), readme);
 
   console.log(`✅ Plugin created: ${pluginDir}`);
   console.log(`   ID: ${pluginId}`);
+  if (recipe.subrecipes && recipe.subrecipes.length > 0) {
+    console.log(`   Subagents: ${recipe.subrecipes.length}`);
   console.log(`   Name: ${recipe.title}`);
+}
+
+// Generate subagents from subrecipes
+function generateSubagentsFromSubrecipes(
+  subrecipes: Array<{ recipe: string; wait_for_completion?: boolean }>,
+  pluginDir: string
+): void {
+  subrecipes.forEach((subrecipe, idx) => {
+    const agentId = normalizeId(subrecipe.recipe);
+    const agentContent = `---
+description: Specialized agent for ${subrecipe.recipe}
+capabilities: ["${subrecipe.recipe.toLowerCase().replace(/\s+/g, "-")}"]
+wait_for_completion: ${subrecipe.wait_for_completion ?? true}
+---
+
+# ${subrecipe.recipe}
+
+This is a specialized subagent that handles the "${subrecipe.recipe}" workflow.
+
+## Capabilities
+
+- Execute the ${subrecipe.recipe} workflow
+- Handle task-specific requirements
+- Report results and status
+
+## When to Use
+
+Invoke this agent when you need to:
+- Run the ${subrecipe.recipe} task
+- Process related workflows
+- Complete specialized operations
+
+## Context
+
+This agent is part of a larger workflow system and coordinates with other agents and components.
+`;
+
+    fs.writeFileSync(
+      path.join(pluginDir, "agents", `${agentId}.md`),
+      agentContent
+    );
+  });
 }
 
 function generateCommandFromRecipe(recipe: GooseRecipe): string {
@@ -314,6 +373,8 @@ ${
 }
 
 function generateReadme(recipe: GooseRecipe, pluginId: string): string {
+  const commandName = recipe.title.toLowerCase().replace(/\s+/g, "-");
+
   return `# ${recipe.title}
 
 ${recipe.description}
@@ -326,11 +387,24 @@ ${recipe.description}
 
 ## Usage
 
-### Command
+### Commands
 
 \`\`\`bash
-/${recipe.title.toLowerCase().replace(/\s+/g, "-")}
+/${commandName}
 \`\`\`
+
+${
+  recipe.subrecipes && recipe.subrecipes.length > 0
+    ? `\n### Subagents\n\nThis plugin includes specialized subagents for:\n${recipe.subrecipes.map((sr) => `- **${sr.recipe}** (wait_for_completion: ${sr.wait_for_completion ?? true})`).join("\n")}`
+    : ""
+}
+
+## Plugin Components
+
+This plugin includes:
+- ✅ **Slash Command**: \`/${commandName}\`
+${recipe.subrecipes && recipe.subrecipes.length > 0 ? `- ✅ **Subagents**: ${recipe.subrecipes.length} specialized agents` : ""}
+${recipe.parameters && recipe.parameters.length > 0 ? `- ✅ **Parameters**: ${recipe.parameters.length} configurable options` : ""}
 
 ## Details
 
@@ -359,14 +433,40 @@ ${
 }
 
 ${
+  recipe.subrecipes && recipe.subrecipes.length > 0
+    ? `\n### Subrecipes/Subagents\n\nThis plugin orchestrates the following subagents:\n\n${recipe.subrecipes.map((sr) => `- **${sr.recipe}**\n  - Wait for completion: ${sr.wait_for_completion ?? true}`).join("\n\n")}`
+    : ""
+}
+
+${
   recipe.retry_config
     ? `\n### Retry Configuration\n\n- Max Attempts: ${recipe.retry_config.max_attempts}\n- Delay: ${recipe.retry_config.delay_seconds}s${recipe.retry_config.backoff_multiplier ? `\n- Backoff Multiplier: ${recipe.retry_config.backoff_multiplier}` : ""}`
     : ""
 }
 
+## Architecture
+
+\`\`\`
+${pluginId}/
+├── .claude-plugin/plugin.json    # Plugin manifest
+├── commands/
+│   └── ${commandName}.md          # Main slash command
+├── README.md                     # This file
+\`\`\`
+
 ## Version
 
 ${recipe.version || "1.0.0"}
+
+## Workflow
+
+This plugin implements the following workflow:
+
+1. Main command triggers via \`/${commandName}\`
+2. Orchestrates subagents (if applicable)
+3. Collects parameters from environment variables
+4. Executes tasks with retry logic (if configured)
+5. Reports results and status
 `;
 }
 
@@ -706,4 +806,11 @@ function printHelp(): void {
 }
 
 // Run main
-main();
+(async () => {
+  try {
+    await main();
+  } catch (err) {
+    console.error("Fatal error:", err);
+    process.exit(1);
+  }
+})();

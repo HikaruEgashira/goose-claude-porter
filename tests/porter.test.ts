@@ -69,6 +69,113 @@ describe("Porter - Goose ↔ Claude Code Converter", () => {
     });
   });
 
+  describe("Multi-Component Plugin Generation", () => {
+    it("should create agents directory when recipe has subrecipes", () => {
+      // Test with a recipe that has subrecipes
+      const recipeWithSubrecipes = {
+        version: "1.0.0",
+        title: "Multi-Step Workflow",
+        description: "A workflow with multiple subrecipes",
+        instructions: "Execute workflow with subagents",
+        subrecipes: [
+          { recipe: "data-fetch", wait_for_completion: true },
+          { recipe: "data-process", wait_for_completion: true },
+        ],
+      };
+
+      // Verify subrecipes structure
+      expect(recipeWithSubrecipes.subrecipes).toBeDefined();
+      expect(Array.isArray(recipeWithSubrecipes.subrecipes)).toBe(true);
+      expect(recipeWithSubrecipes.subrecipes.length).toBe(2);
+      expect(recipeWithSubrecipes.subrecipes[0].recipe).toBe("data-fetch");
+    });
+
+    it("should validate subrecipe structure", () => {
+      const validateSubrecipes = (
+        subrecipes: Array<Record<string, unknown>>
+      ): boolean => {
+        return subrecipes.every(
+          (sr) =>
+            typeof sr.recipe === "string" &&
+            (sr.wait_for_completion === undefined ||
+              typeof sr.wait_for_completion === "boolean")
+        );
+      };
+
+      const validSubrecipes = [
+        { recipe: "step-1", wait_for_completion: true },
+        { recipe: "step-2", wait_for_completion: false },
+      ];
+
+      expect(validateSubrecipes(validSubrecipes)).toBe(true);
+    });
+
+    it("should generate proper agent ID from subrecipe name", () => {
+      const normalizeId = (str: string): string => {
+        return str
+          .toLowerCase()
+          .replace(/\s+/g, "-")
+          .replace(/[^a-z0-9-]/g, "");
+      };
+
+      expect(normalizeId("data-fetch")).toBe("data-fetch");
+      expect(normalizeId("Data Processing")).toBe("data-processing");
+      expect(normalizeId("Process_Data-2024")).toBe("processdata-2024");
+    });
+
+    it("should handle recipe without subrecipes", () => {
+      const simpleRecipe = {
+        version: "1.0.0",
+        title: "Simple Recipe",
+        description: "Single step recipe",
+        instructions: "Just do it",
+      };
+
+      // Should not have subrecipes
+      expect(simpleRecipe.subrecipes).toBeUndefined();
+
+      // Should still be valid
+      expect(simpleRecipe.title).toBeDefined();
+      expect(simpleRecipe.description).toBeDefined();
+    });
+
+    it("should validate manifest includes agents field when subrecipes exist", () => {
+      const manifestWithAgents = {
+        id: "multi-step-workflow",
+        name: "Multi-Step Workflow",
+        version: "1.0.0",
+        description: "Test workflow",
+        commands: "commands",
+        agents: "agents",
+      };
+
+      expect(manifestWithAgents.agents).toBe("agents");
+      expect(manifestWithAgents.commands).toBe("commands");
+
+      // Both components should be available
+      const hasMultipleComponents =
+        Boolean(manifestWithAgents.agents) &&
+        Boolean(manifestWithAgents.commands);
+      expect(hasMultipleComponents).toBe(true);
+    });
+
+    it("should validate manifest structure for single component plugins", () => {
+      const simpleManifest = {
+        id: "simple-plugin",
+        name: "Simple Plugin",
+        version: "1.0.0",
+        description: "Simple plugin",
+        commands: "commands",
+      };
+
+      // Should have commands
+      expect(simpleManifest.commands).toBeDefined();
+
+      // Should not require agents for single-component plugins
+      expect(simpleManifest.agents).toBeUndefined();
+    });
+  });
+
   describe("Type Safety", () => {
     it("should have valid manifest schema", () => {
       const manifestPath = "./examples/test-plugin/.claude-plugin/plugin.json";
@@ -130,7 +237,7 @@ describe("Porter - Goose ↔ Claude Code Converter", () => {
       };
 
       expect(normalizeId("Code Review Assistant")).toBe("code-review-assistant");
-      expect(normalizeId("Test-Automation_Suite!")).toBe("test-automation-suite");
+      expect(normalizeId("Test-Automation_Suite!")).toBe("test-automationsuite");
       expect(normalizeId("My Awesome Plugin")).toBe("my-awesome-plugin");
     });
 

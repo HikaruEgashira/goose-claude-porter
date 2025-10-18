@@ -20,6 +20,8 @@ Convert your recipes into plugins and vice versa to maximize workflow portabilit
 - **Metadata Preservation**: Maintains all configuration details during conversion
 - **CLI Interface**: Simple, intuitive command-line tools
 - **TypeScript**: Full type safety with TypeScript
+- **Claude Code Skills**: Integrated skills for generating skills and recipes
+- **Interactive Generation**: User-friendly CLI for creating recipes and skills
 
 ## 📋 Quick Start
 
@@ -119,6 +121,40 @@ Checks:
 - Required manifest fields present
 - Plugin ID format (lowercase, hyphens only)
 - Directory structure compliance
+
+## 🔧 Claude Code Skills
+
+This project includes ready-to-use Claude Code Skills located in `.claude/skills/`:
+
+### Available Skills
+
+1. **skill-generator-creator**
+   - Creates custom Claude Code Skills with manifests, instructions, and examples
+   - Generates skill.json, instructions.md, examples.md, and README.md
+   - Supports categories: document, automation, analysis, integration, custom
+   - Includes environment variables and MCP server configurations
+
+2. **recipe-generator-creator**
+   - Creates Goose Shared Recipes with full YAML manifests
+   - Supports parameters, extensions, MCP servers, and retry configurations
+   - Enables multi-step workflows with subrecipes
+   - Generates recipe.yaml and comprehensive documentation
+
+3. **subrecipe-generator-creator**
+   - Creates organized Subrecipe collections for multi-step workflows
+   - Generates individual subrecipe YAML files with numbering
+   - Creates comprehensive INDEX.md with execution order and dependencies
+   - Supports sequential and parallel execution patterns
+
+### Using Skills in Claude Code
+
+Reference these skills in your Claude Code interactions:
+```
+Apply the skill-generator-creator skill to create a new Claude Code Skill
+Apply the recipe-generator-creator skill to create a new Goose Recipe
+Apply the subrecipe-generator-creator skill to create Subrecipes
+```
+
 
 ## 🏗️ Architecture
 
