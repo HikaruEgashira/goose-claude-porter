@@ -134,25 +134,24 @@ This project includes ready-to-use Claude Code Skills located in `.claude/skills
    - Supports categories: document, automation, analysis, integration, custom
    - Includes environment variables and MCP server configurations
 
-2. **recipe-generator-creator**
-   - Creates Goose Shared Recipes with full YAML manifests
+2. **recipe-creator** (Unified)
+   - Creates Goose Shared Recipes with flexible options
+   - **Simple recipes**: Single-step recipes (no subrecipes)
+   - **Complex recipes**: Multi-step recipes with organized subrecipes
+   - **Add to existing**: Add subrecipes to existing recipes
    - Supports parameters, extensions, MCP servers, and retry configurations
-   - Enables multi-step workflows with subrecipes
-   - Generates recipe.yaml and comprehensive documentation
-
-3. **subrecipe-generator-creator**
-   - Creates organized Subrecipe collections for multi-step workflows
-   - Generates individual subrecipe YAML files with numbering
-   - Creates comprehensive INDEX.md with execution order and dependencies
-   - Supports sequential and parallel execution patterns
+   - Generates recipe.yaml, subrecipes/, and comprehensive documentation
 
 ### Using Skills in Claude Code
 
 Reference these skills in your Claude Code interactions:
 ```
 Apply the skill-generator-creator skill to create a new Claude Code Skill
-Apply the recipe-generator-creator skill to create a new Goose Recipe
-Apply the subrecipe-generator-creator skill to create Subrecipes
+
+Apply the recipe-creator skill to:
+- Create a simple single-step recipe
+- Create a multi-step recipe with subrecipes
+- Add subrecipes to an existing recipe
 ```
 
 

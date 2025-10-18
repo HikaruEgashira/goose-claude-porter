@@ -16,18 +16,24 @@ Creates Claude Code Skills from specifications. Use this skill when you need to:
 Apply the skill-generator-creator skill to create a new Claude Code Skill
 ```
 
-### recipe-generator-creator
-Creates Goose Shared Recipes with parameters, subrecipes, and configurations. Use this skill when you need to:
-- Generate Goose recipe YAML files
-- Create multi-step workflows with subrecipes
-- Configure retry logic and error handling
-- Set up MCP server integrations
-- Define recipe parameters
+### recipe-creator
+Creates Goose Shared Recipes with optional multi-step subrecipes. Use this skill when you need to:
+- Generate simple single-step recipes
+- Create multi-step recipes with organized subrecipes
+- Configure parameters, extensions, MCP servers
+- Set up retry logic and error handling
+- Add subrecipes to existing recipes
+- Choose between simple or complex workflows
 
 **Usage:**
 ```
-Apply the recipe-generator-creator skill to create a new Goose Recipe
+Apply the recipe-creator skill to create a new Goose Recipe (with or without subrecipes)
 ```
+
+**Options:**
+- Create simple recipe (no subrecipes)
+- Create recipe with subrecipes (multi-step workflow)
+- Add subrecipes to existing recipe
 
 ## Integration
 

@@ -39,84 +39,40 @@ This directory contains Claude Code Skills that enhance the Porter project with 
 - Capability mapping
 - Metadata preservation
 
-### 2. recipe-generator-creator
+### 2. recipe-creator
 
-**Purpose**: Create Goose Shared Recipes with advanced configurations
+**Purpose**: Create Goose Shared Recipes with flexible options for subrecipes
 
 **Use When**:
-- You need to generate a Goose Recipe from specifications
-- You want to create recipes with parameters and extensions
-- You need to configure retry logic and error handling
-- You want to set up MCP server integrations
-- You need to define recipe-level configurations
+- You need to create a simple single-step recipe
+- You want to create a multi-step recipe with organized subrecipes
+- You need to add subrecipes to an existing recipe
+- You want to configure parameters, extensions, and error handling
+- You need to define retry logic and MCP server integrations
 
-**Generated Files**:
-- `recipe.yaml` - Complete Recipe YAML manifest
-- `README.md` - Recipe documentation
+**Generated Files** (depending on option):
+- Simple recipe: `recipe.yaml` + `README.md`
+- With subrecipes: `recipe.yaml` + `README.md` + `subrecipes/` (INDEX.md + N-step-name.yaml files)
 
 **Capabilities**:
+- Single-step recipe creation
+- Multi-step workflow creation
 - Strongly-typed parameters
 - Retry configuration with backoff
 - Goose extension support
 - MCP server configuration
 - Optional prompts and instructions
-- Multi-format support (YAML/JSON)
-
-### 3. subrecipe-generator-creator
-
-**Purpose**: Create organized Subrecipe collections for multi-step workflows
-
-**Use When**:
-- You need to break down recipes into steps
-- You want to create multi-step workflows
-- You need to define execution order and dependencies
-- You want to control wait behavior for each step
-- You need step-specific parameters
-
-**Generated Files**:
-- `INDEX.md` - Overview and execution mapping
-- Individual `N-step-name.yaml` files (numbered 1-, 2-, 3-...)
-
-**Capabilities**:
-- Sequential execution workflows
-- Parallel execution patterns
-- Step-specific parameters
-- Completion wait configuration
-- Comprehensive documentation
-- Automatic numbering and ordering
+- Sequential and parallel execution patterns
+- Automatic subrecipe numbering (1-, 2-, 3-...)
+- Comprehensive documentation generation
 
 ## Usage
 
-### Interactive Mode
-
-```bash
-cd /tmp/goose-claude-porter
-bun run interactive
-```
-
-Then select:
-1. "Claude Code Skill" - to create a new skill
-2. "Goose Recipe" - to create a new recipe
-3. "Goose Subrecipes" - to create subrecipes
-
-### CLI Mode
-
-```bash
-# Create a Claude Code Skill
-bun run create-skill "PDF Processing" ./skills
-
-# Create a Goose Recipe
-bun run create-recipe "Data Pipeline" ./recipes
-
-# Generate YAML output only
-bun run generate-skill "Analysis Tool"
-bun run generate-recipe "Report Generator"
-```
-
-### In Claude Code
+### In Claude Code (Recommended)
 
 Reference these skills directly:
 
+**Create a Skill:**
 ```
 Use the skill-generator-creator skill to create a new PDF Processing skill with:
 - Description: Advanced PDF manipulation
@@ -124,11 +80,30 @@ Use the skill-generator-creator skill to create a new PDF Processing skill with:
 - Capabilities: extraction, conversion, merging
 ```
 
+**Create a Simple Recipe:**
 ```
-Use the recipe-generator-creator skill to create a Data Pipeline recipe with:
+Use the recipe-creator skill to create a Code Formatter recipe with:
+- Description: Format code according to style guide
+- Parameters: file_path, style_guide (optional)
+- No subrecipes
+```
+
+**Create a Recipe with Subrecipes:**
+```
+Use the recipe-creator skill to create a Data Pipeline recipe with:
+- Description: ETL workflow
 - Parameters: source_path, output_format
+- Subrecipes:
+  1. data-extract
+  2. data-transform
+  3. data-load
 - Retry config: 3 attempts, 2s delay
-- Subrecipes: extraction, validation, transformation
+```
+
+**Add Subrecipes to Existing Recipe:**
+```
+Use the recipe-creator skill to add subrecipes to ./recipes/my-recipe/recipe.yaml:
+- Add subrecipes: prepare, execute, cleanup
 ```
 
 ## Integration with Porter
